@@ -1,19 +1,28 @@
-name: Workflow 2
+
+name: Build
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+
+env: # workflow-level
+  GLOBAL_VAR: "hello"
 
 jobs:
-  lint-and-test:
+  build:
     runs-on: ubuntu-latest
-    env:
-      NODE_VERSION: "18"
-            
+    env: # job-level
+      JOB_VAR: "world"
+
     steps:
-      - name: test step
+      - name: Step with local env
+        env: # step-level
+          STEP_VAR: "!"
         run: |
-          echo "This is a test step $env:NODE_VERSION"
-          echo "Secret: ${{secrets.REPO_SECRET}}"
+          echo "GLOBAL_VAR=$GLOBAL_VAR"   # shell env in run
+          echo "JOB_VAR=$JOB_VAR"
+          echo "STEP_VAR=$STEP_VAR"
+
+      - name: Access via expressions
+        run: |
+          echo "Global via expression: ${{ env.GLOBAL_VAR }}"
+          echo "Job via expression: ${{ env.JOB_VAR }}"
