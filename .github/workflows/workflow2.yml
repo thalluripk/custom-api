@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_VERSION: "18"
-      
+            
     steps:
       - name: test step
         run: |
-          echo "This is a test step $NODE_VERSION"
+          echo "This is a test step $env:NODE_VERSION"
           echo "Secret: ${{secrets.REPO_SECRET}}"
