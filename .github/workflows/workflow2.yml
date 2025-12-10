@@ -26,3 +26,13 @@ jobs:
         run: |
           echo "Global via expression: ${{ env.GLOBAL_VAR }}"
           echo "Job via expression: ${{ env.JOB_VAR }}"
+
+      - name: Compute and persist
+        run: |
+          RESULT="build-$(date +%Y%m%d%H%M)"
+          echo "BUILD_ID=$RESULT" >> "$GITHUB_ENV"
+
+      - name: Display Build ID
+        run: |
+          echo "Build ID: $BUILD_ID"
+
