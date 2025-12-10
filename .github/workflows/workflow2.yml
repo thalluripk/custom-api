@@ -6,6 +6,7 @@ on:
 
 env: # workflow-level
   GLOBAL_VAR: "hello"
+  SECRET1: ${{secrets.REPO_SECRET}}
 
 jobs:
   build:
@@ -39,3 +40,7 @@ jobs:
       - name: Display Environment Variables
         run: |
           env
+      
+      - name: Display Secret
+        run: |
+          echo "Secret: $SECRET1"
