@@ -36,3 +36,6 @@ jobs:
         run: |
           echo "Build ID: $BUILD_ID"
 
+      - name: Display Environment Variables
+        run: |
+          env
